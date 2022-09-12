@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/jquery/dist/jquery.min.js"></script>
+    <script src="/js-cookie/dist/js.cookie.min.js"></script>
+
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        body{
+            background-image: url(/images/bgc.jpeg);
+        }
+        .zhong{
+            width: 600px;
+            height: 700px;
+            margin: 50px auto;
+            border: 1px solid black;
+            background-color: rgba(255,255,255,0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content:center; 
+            align-items: center;
+            border-radius: 50px;
+        }
+        form{
+            display: flex;
+            width: 1000px;
+            height: 200px;
+            /* background-color: pink; */
+            flex-direction: column;
+            justify-content:center; 
+            align-items:center;
+        }
+        .yonghu{
+            width: 550px;
+            height: 50px;
+            /* background-color: pink; */
+            line-height: 50px;
+            margin: 20px 0px;
+            text-align: center;
+            color: rgb(83, 83, 83);
+        }
+        form input{
+            width: 300px;
+            height: 30px;
+            border-radius: 15px;
+            margin: 10px 0px;
+            border: 1px solid black;
+            outline: none;
+        }
+        form .sub{
+            width: 100px;
+            height: 50px;
+            background-color: linear-gradient(to right, #f568cd, #769de1);
+        }
+        .sua{
+            display: block;
+            text-decoration: none;
+        }
+        form #sub:hover{
+            cursor: pointer;
+        }
+
+        .pa{
+            padding-left: 20px;
+        }
+        .zhong img{
+            width: 200px;
+            height: 200px;
+            border-radius: 100px;
+            margin-bottom: 40px;
+            border: 1px solid black;
+        }
+    </style>
+    <script src="/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+    <div class="zhong">
+        <img src="/images/touxiang.jpeg" alt="未显示图像">
+        <h2>--------------------聊天系统--------------------</h2>
+        <div class="yonghu"><h3>用户登入 User Login</h3></div>
+        <form action="/loading" method="post">
+            <p class="yanshe" style="color:rgb(177, 177, 177)"><%=data%></p>
+            <input type="text" name="username"  placeholder="  用户名" class="pa">
+            <input type="password" name="password" placeholder="  密码" class="pa"><br>
+            <input type="submit" value="confirm" class="sub">
+            <a href="/index2" class="sua">游客登入</a> 
+    </div>
+    
+</body>
+<script>
+    let a=Cookies.get("data");
+    if(a=='false'){
+        ps.style.color='red';
+        Cookies.remove("data");
+    }
+
+</script>
+</html>
+
+

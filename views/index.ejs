@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/jquery/dist/jquery.min.js"></script>
+    <script src="/js-cookie/dist/js.cookie.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <style>
+        *{
+            text-decoration: none;
+            list-style: none;
+            margin: 0px;
+            padding: 0px;
+        }
+        .zhong{
+            width: 1000px;
+            height: 740px;
+            margin: 100px auto;
+            /* background-color: pink; */
+        }
+
+
+        /* top开始 */
+        .top{
+            width: 1000px;
+            height: 60px;
+            background-color: rgba(32, 32, 32, 0.8);
+            display: flex;
+            justify-content: space-between;
+            border-radius: 20px 20px 0px 0px;
+            border:1px solid black;
+            box-sizing: border-box;
+        }
+        .top .loadleft{
+            display: flex;
+            width: 200px;
+        }
+        .top .loadleft a, .loadleft-sussce a{
+            width: 50px;
+            line-height: 58px;
+            padding-left: 30px;
+            color: rgb(214, 214, 214);
+        }
+        .top .loadleft a:hover{
+            color: brown;
+        }
+
+        .top p{
+            margin: 0px 50px;
+            line-height: 60px;
+        }        
+        /* top结束 */
+
+
+
+        /* center类开始 */
+        .center{
+            width: 1000px;
+            height: 680px;
+            /* background-color: blue; */
+            position: relative;
+        }
+
+        /* center 左部分 */
+        .center .center-left{
+            height: 680px;
+            width: 200px;
+            border-right: 1px solid black;
+            border-left: 1px solid black;
+            border-bottom: 1px solid black;
+            box-sizing: border-box;
+            border-radius: 0px 0px 0px 20px;
+            overflow: auto;
+        }
+        .center .center-left-ul{
+            padding:20px;
+            
+        }
+        .center .center-left-ul li{
+            margin: 10px 0px;
+            height: 27px;
+            color: rgb(101, 101, 101);
+            font-size: 10px;
+            line-height: 27px;
+            font-size: 18px;
+            position: relative;
+            
+        }
+        
+        .center .center-left-ul li img{
+            width: 27px;
+            height: 27px;
+            background-color: pink;
+        }
+        .center .center-left-ul li p::after{
+            content: '';
+            display: block;
+            width: 120px;
+            border-bottom:1px solid black ;
+        }
+        .center .center-left-ul li p{
+            position:absolute;
+            left: 27px;
+            top:0px;
+            height: 27px;
+            margin-left: 5px;
+        }
+
+        .center .center-left-ul img{
+            width: 25px;
+            height: 25px;
+            border: 1px solid black;
+            background-color: black;
+        }
+
+
+        /* center 底部 */
+        .center .center-bottom{
+            position:absolute;
+            width: 800px;
+            height: 200px;
+            background-color: rgba(255, 255, 255, 0.776);
+            bottom: 0;
+            right: 0;
+            border-top: 1px solid black;
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+            box-sizing: border-box;
+            border-radius: 0px 0px 20px 0px;
+        }
+
+
+        /* center 谈话部分 */
+        .center .center-inf{
+            position: absolute;
+            height: 480px;
+            width: 800px;
+            right: 0px;
+            top: 0px;
+            border-right:1px solid black;
+            overflow: auto;
+            background-color: rgba(235, 233, 233, 0.532);
+
+        }
+        .talks{
+            padding: 15px 20px;
+            display: flex;
+            width: 700px;
+
+        }
+        .talks img{
+            width: 30px;
+            height: 30px;
+            border: 1px solid black;
+            background-color: pink;
+        }
+
+        .talks .hua{
+            width: 250px;
+            background-color: rgb(109, 253, 116);
+            border: 1px solid black;
+            border-radius: 10px;
+            word-wrap:break-word; 
+            padding: 5px;
+        }
+        .talks .name{
+            padding: 0px 5px;
+            line-height: 31px;
+        }
+        .talks span{
+            line-height: 32px;
+            margin: 0px 5px;
+        }
+
+
+        /* buttom部分 */
+        .center-bottom .setinf{
+            width: 799px;
+            height: 150px;
+            /* background-color: pink; */
+            border: 0px solid black;
+            padding: 20px;
+            box-sizing: border-box;
+            font-size: 15px;
+            resize:none;
+            outline:none
+        }
+
+        .center-bottom .send{
+            float: right;
+            margin-right: 20px;
+            margin-top: 3px;
+            width: 70px;
+            height: 35px;
+            border-radius: 20px;
+            background-color: rgb(74, 195, 255);
+            border: 0px solid black;
+        }
+        .center-bottom .xiaoguo:hover{
+            background-color: rgb(0, 149, 255);
+            cursor: pointer;
+        }
+
+
+        /* center类结束 */
+        .leftj{
+            float: left;
+            justify-content: left;
+        }
+
+        .rightj{
+            float: right;
+            justify-content: right;
+        }
+        /* 登入成功后的页面改变 */
+        .loadleft-sussce img{
+            width: 56px;
+            height: 56px;
+            border-radius: 28px;
+            background-color: pink;
+            float: left;
+        }
+        .personright p{
+            line-height: 56px;
+            font-size: 15px;
+            margin-left: 5px;
+            color: rgb(186, 186, 186);
+            float: right;
+
+        }
+
+        .personright a p{
+            color: rgb(214, 214, 214);
+        }
+        .personright a p:hover{
+            color: brown;
+        }
+
+
+        .loadleft-sussce{
+            width: 200px;
+            padding: 0px 30px;
+            box-sizing: border-box;
+        }
+        .pb{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <p class="spcial" style="display:none;"><%=data%></p>
+    <div class="zhong">
+        <!-- 登入按钮 -->
+            <div class="top">
+                <div class="loadleft">
+                    <a id="loadinguser" class="fon" href="/load">登入</a>
+                </div>
+                <div class="loadleft-sussce" style="display:none">
+                    <img src="/images/tou1.jpeg" alt="">
+                    <a id="outing" class="fon outin" href="/outing">退出</a>
+                </div>
+
+                <div class="classname"><p style="color: rgb(211, 211, 211);">群聊信息</p></div>
+                <div class="personright"><p class="pa"></p><a href="#"><p>个人信息</p></a></div>
+            </div>
+        <div class="center">
+            <div class="center-left">
+                <ul class="center-left-ul">
+                </ul>
+            </div>
+            <div class="center-inf">
+                
+            </div>
+            <div class="pb">
+                <div class="talks leftj">
+                    <img src="/images/tou1.jpeg" alt="">
+                    <div class="name">xong</div><span>:</span>
+                    <div class="hua">2222</div>
+                </div><br>
+                <div class="talks rightj ">
+                    <div class="hua">111111</div>
+                    <span>:</span><div class="name">tong</div>
+                    <img src="/images/tou1.jpeg" alt="">
+                </div><br>
+            </div>
+            <div class="center-bottom">
+                <textarea class="setinf" type="text"></textarea>
+                <button class="send xiaoguo">发送</button>
+            </div>
+        </div>
+    </div>
+    
+</body>
+<script>
+    let socket=io.connect('/');
+
+    let c=null;
+    let i=null;
+    c=Cookies.get("data");
+    // Cookies.set(i,c,{expires:0.05,path:'/'});//i:admin1
+    // c=Cookies.get(i);
+    // console.log(c);
+
+
+
+    check(c);
+    function oldclass(){
+        $('.loadleft').show();
+        $('.loadleft-sussce').hide();
+        $('.send').removeClass('xiaoguo');
+        $('.setinf').attr('disabled','disabled');
+        $('.personright .pa').html('欢迎，游客');
+    }
+
+    function newclass(a){
+        $('.loadleft').hide();
+        $('.loadleft-sussce').show();
+        $('.send').addClass('xiaoguo');
+        $('.personright .pa').html(`欢迎，${a}`);
+    }
+
+    function check(c){
+        if(!c){
+            oldclass();
+            if(Cookies.get(i)){
+                newclass(Cookies.get(i));
+            }
+        }else{
+            newclass(c);
+            i=Cookies.get('id');                           
+            Cookies.set(i,c,{expires:0.05,path:'/'});//i:admin1
+            Cookies.remove("data");
+            Cookies.remove("id");
+
+        }
+    }
+
+
+    $('#outing').click(function(e){
+        let sign=$('.spcial').html();
+        let cook=Cookies.get();
+        for(let k in cook){
+            if(cook[k]==sign){
+                Cookies.remove(k);
+            }
+        }
+    })
+
+
+
+    $('.send').click(function(){
+        let name=c;
+        let vall=$('textarea').val();
+        let right=$('.pb .rightj').clone();
+        right.find('.hua').html(vall);
+        right.find('.name').html(name);
+        $('.center-inf').append(right);
+        socket.emit('meeting',{name:name,data:vall});
+        $('textarea').val('');
+    })
+
+    setInterval(function(){
+        $('.center-left-ul').empty('li');
+        let cooks=Cookies.get();
+        for(let k in cooks){
+            let a=cooks[k];
+            $('.center-left-ul').append(`<li class="center-left-li"><img src="/images/tou1.jpeg" alt=""><p>${a}</p></li>`);
+        }
+        //{1: 'admin1', 2: 'admin2', 3: 'admin3', id: '3'}
+        
+    },1000);
+
+    socket.on('meeting',function(res){
+        let left=$('.pb .leftj').clone();
+        left.find('.name').html(res.name);
+        left.find('.hua').html(res.data);
+        $('.center-inf').append(left);
+    })
+</script>
+</html>
